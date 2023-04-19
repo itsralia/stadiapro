@@ -100,9 +100,9 @@ app.use("/regression", regressionRoutes)
 app.use("/help", helpRoutes)
 
 // // error handdling
-// app.use(function(req,res){
-//   res.status(404).render('errorpage.ejs');
-// });
+app.use(function(req,res){
+  res.status(404).render('errorpage.ejs');
+});
 
 
 
