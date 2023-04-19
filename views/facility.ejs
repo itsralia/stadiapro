@@ -133,7 +133,7 @@ input[type="submit"]:hover {
                 <tr>
                     <td><%= facility.facility_id %></td>
                     <td><%= facility.facility_desc %></td>
-                    <td><%= facility.location.locationName %></td>
+                    <td><%= facility.location ? facility.location.locationName : 'N/A' %></td>
                     <td><%= facility.category.category %></td>
                     <td><%= facility.interval %></td>
 
