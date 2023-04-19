@@ -1,0 +1,133 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="css/location.css">
+
+    <title>Equipment Category</title>
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+          margin-top: 20px;
+        }
+        
+        th, td {
+          text-align: left;
+          padding: 8px;
+          border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+          background-color: #4CAF50;
+          color: white;
+        }
+
+        form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+label {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+input[type="text"], input[type="email"], input[type="password"],  select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f2f2f2;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='5'><path d='M1 1l3 3 3-3' stroke='%23333' stroke-width='2' fill='none' stroke-linecap='square'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+input[type="submit"]:hover {
+  background-color: #555;
+}
+
+        </style>
+  </head>
+  <body>
+    <h3><i id="back-btn" class="fas fa-arrow-left back-button"></i></h3>  
+    <div class="login-box">
+    <h1 style="text-align: center; color: white;">Create Services</h1>
+
+    <form action="/service/addservice" method="POST">
+        <label for="location">Service id</label>
+        <input type="text" name="service_id" required>
+        <label for="location_id">Service:</label>
+        <input type="text" name="service" required>
+
+        <label for="outsourced">Outsourced:</label>
+      <select name="outsourced" id="outsourced" required>
+        <option value="" disabled selected>Select Option</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select><br><br>
+        <label for="managed">Managed By:</label>
+        <input type="text" name="managed_by" required>
+        <button style="margin-bottom: 10%;" type="submit" class="btn btn-danger">Add Services</button>
+    </form>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th> Service ID</th>
+                <th>Service</th>
+                <th>Outsourced</th>
+                <th>Managed By</th>
+
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% services.forEach(function(service) { %>
+                <tr>
+                    <td><%= service.service_id %></td>
+                    <td><%= service.service %></td>
+                    <td><%= service.outsourced %></td>
+                    <td><%= service.managed_by %></td>
+                    <td class="icon" style="width: 50px;">
+                        <form action="/service/deleteservice/<%= service._id %>?_method=DELETE"  method="POST">
+                          <button type="submit" class="btn btn-danger delete-icon"><i class="fa fa-trash"></i></button>
+                        </form>
+                      </td> 
+                      <td class="icon" style="width: 50px;">
+                        <form action="/service/edit/<%= service._id %>" method="GET">
+                          <button type="submit" class="btn btn-primary edit-icon"><i class="fa fa-edit"></i></button>
+                        </form>
+                    </tr>
+
+
+
+
+            <% }); %>
+        </tbody>
+    </table>
+    <script src="dist/js/location.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="css/location.css">
+    <title>Location Form</title>
+    
+  </head>
+  <body class="dimmed">
+    <h3><i id="back-btn" class="fas fa-arrow-left back-button"></i></h3>
+    <div class="login-box">
+   
+      <div class="form-container">
+        <h2 style="text-align: center; color: white;">Add Location</h2>
+        <form action="/addlocation" method="POST">
+          <div class="user-box">
+            <input type="text" name="location" required="">
+            <label>Location:</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="location_id" required="">
+            <label>Location ID:</label>
+          </div>
+          <button type="submit" class="btn btn-danger">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Add Location
+          </button>
+        </form>
+      </div>
+      
+    </div>
+    
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Location ID</th>
+                <th>Location Name</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+          
+            <% locations.forEach(function(location) { %>
+                <tr>
+                      <td><%= location.location_id %></td>
+                      <td><%= location.locationName %></td>
+                  
+                    <td class="icon" style="width: 50px;">
+                        <form action="/location/<%= location._id %>?_method=DELETE"  method="POST">
+                          <button type="submit" class=" btn-danger delete-icon"><i class="fa fa-trash"></i></button>
+                        </form>
+                      </td> 
+                      <td class="icon" style="width: 50px;">
+                        <form action="/location/edit/<%= location._id %>" method="GET">
+                          <button type="submit" class=" btn-primary edit-icon"><i class="fa fa-edit"></i></button>
+                        </form>
+                    </tr>
+
+
+            <% }); %>
+        </tbody>
+    </table>
+    <script src="dist/js/location.js"></script>
+</body>
+</html>

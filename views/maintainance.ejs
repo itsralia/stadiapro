@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+
+    <title>Equipment Category</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+      
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+      
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+        margin-bottom: 10%;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+      
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      
+      table {
+        margin-top: 50px;
+        border-collapse: collapse;
+        width: 80%;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      
+      th, td {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+      }
+      
+      th {
+        background-color: #4CAF50;
+        color: #fff;
+      }
+      .delete-icon:hover {
+  cursor: pointer;
+}
+
+
+    </style>
+  </head>
+  <body>
+    <h3><a href="/login">Home</a></h3>
+    <h1>Maintainance Activity</h1>
+    <form action="/maintainance/addmaintainance" method="POST">
+        <label for="location">Check</label>
+        <input type="text" name="check" required>
+
+        <label for="location">Maintainance ID</label>
+        <input type="text" name="maintainance_id" required>
+
+
+        <label for="location_id">Causes:</label>
+        <input type="text" name="cause" required>
+
+
+        <label for="location">Percentage</label>
+        <input type="text" name="percentage" required>
+
+        <label for="outsourced">Frequency</label>
+        <select name="frequency" id="frequency" required>
+          <option value="" disabled selected>Select Location</option>
+          <% frequency.forEach(function(frequency) { %>
+            <option value="<%= frequency._id %>"><%= frequency.frequencyName %></option>
+          <% }); %>
+        </select>
+
+        <label for="outsourced">Operator</label>
+        <select name="operator" id="frequency" required>
+          <option value="" disabled selected>Select Operator</option>
+          <% departments.forEach(function(department) { %>
+            <option value="<%= department._id %>"><%= department.departmentName %></option>
+          <% }); %>
+        </select>
+
+        <label for="outsourced">Assigned Staff</label>
+        <select name="staff" id="category" required>
+          <option value="" disabled selected>Select Staff</option>
+          <% staffs.forEach(function(staff) { %>
+            <option value="<%= staff._id %>"><%= staff.firstName %></option>
+          <% }); %>
+        </select>
+      
+      <br><br>
+      <label for="location_id">Maintenance Instructions:</label>
+      <input type="text" name="instruction" required>
+      <br>
+      <label for="mainrepair">Maintainance / Repair:</label>
+      <select name="mainrepair" id="mainrepair" required>
+        <option value="" disabled selected>Select one</option>
+        <option value="Maintenance">Maintenance</option>
+        <option value="Replacement">Replacement</option>
+        
+      </select><br><br>
+
+      <label for="price">Cost Associated :</label>
+      <input type="text" name="price" required>
+
+        <button type="submit" class="btn btn-danger">Add Maintainance</button>
+    </form>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th> Maintainance ID</th>
+                <th>Facility ID</th>
+                <th>Percentage</th>
+                <th>Cause</th>
+                <th>Frequency</th>
+                <th>Operator</th>
+                <th>Assigned Staff</th>
+                <th>Maintainance/Repair</th>
+                <th>Cost</th>
+
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% maintainance.forEach(function(maintain) { %>
+                <tr>
+                    <td><%= maintain.maintainance_id %></td>
+                    <td><%= maintain.check %></td>
+                    <td><%= maintain.percentage %></td>
+                    <td><%= maintain.cause %></td>
+
+                    <td><%= maintain.frequency.frequencyName %></td>
+                    <td><%= maintain.operator.departmentName %></td>
+                    <td><%= maintain.assigned_staff ? maintain.assigned_staff.firstName : '' %></td>
+                    <td><%= maintain.mainrepair %></td>
+
+                    <td><%= maintain.price %></td>
+                    <%= maintainance._id %>
+
+                   
+                    
+                    <td class="icon" style="width: 50px;">
+                      <form action="/maintainance/deletemaintainance/<%= maintain._id %>/?_method=DELETE"  method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger delete-icon"><i class="fa fa-trash"></i></button>
+                      </form>
+                    </td>
+                    
+                      <td class="icon" style="width: 50px;">
+                        <form action="/maintainance/edit/<%= maintainance._id %>" method="GET">
+                          <button type="submit" class="btn btn-primary edit-icon"><i class="fa fa-edit"></i></button>
+                        </form>
+                    </tr>
+
+                  
+
+
+            <% }); %>
+            
+        </tbody>
+    </table>
+</body>
+</html>

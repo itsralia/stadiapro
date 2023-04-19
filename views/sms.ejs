@@ -1,0 +1,43 @@
+<!-- sms.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>SMS Form</title>
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="css/location.css">
+  </head>
+
+  <style>
+
+  </style>
+  <body>
+    <h3><i id="back-btn" class="fas fa-arrow-left back-button"></i></h3>
+    <div class="login-box">     
+        <div class="form-container">
+      <form action="/sms/sendsms" method="POST">
+      <h1>Send SMS</h1>
+      <label for="staffName">Phone Number:</label>
+      <select id="staffName" name="phoneNumber">
+        <% staffList.forEach(staff => { %>
+          <option value="<%= staff.mobilePhone %>"><%= staff.firstName %> <%= staff.lastName %> - <%= staff.mobilePhone %></option>
+        <% }) %>
+      </select>
+      <br />
+      <label for="facility">Facility:</label>
+      <select id="facility" name="facility">
+        <% facilityList.forEach(facility => { %>
+          <option value="<%= facility.facility_desc %>"><%= facility.facility_desc %></option>
+        <% }) %>
+      </select>
+      <br />
+      <label for="message">Message:</label>
+      <textarea id="message" name="message"></textarea>
+      <br />
+      <button type="submit">Send SMS</button>
+    </form>
+    </div>
+    </div>
+  </body>
+</html>

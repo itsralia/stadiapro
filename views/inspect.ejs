@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="css/location.css">
+
+
+
+    <title>Equipment Category</title>
+    <style>
+      table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+          }
+          
+          th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+          }
+          
+          th {
+            background-color: #4CAF50;
+            color: white;
+          }
+  
+          form {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+  </style>
+
+  </head>
+  <body>
+    <h3><i id="back-btn" class="fas fa-arrow-left back-button"></i></h3>
+    <div class="login-box">
+    <h1 style="text-align: center; color: white;">Inspect Facilities</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th> Facility ID</th>
+                <th>Facility Description</th>
+                <th>Location</th>
+                <th>Category</th>
+                <th>Cost</th>
+                <th>Last Maintenance Date</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% facilities.forEach(function(facility) { %>
+            <tr>
+              <td><%= facility.facility_id %></td>
+              <td><%= facility.facility_desc %></td>
+              <td><%= facility.location.locationName %></td>
+              <td><%= facility.category.category %></td>
+              <td>
+                <% if (facility.maintainance && facility.maintainance.length > 0) { %>
+                  <%= facility.maintainance[0].price %>
+                <% } else { %>
+                  N/A
+                <% } %>
+              </td>
+              <td><%= facility.createdAt.toLocaleString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true}) %></td>
+
+            </tr>
+          <% }); %>
+          
+          
+          
+            
+        </tbody>
+    </table>
+    <script src="dist/js/location.js"></script>
+
+</body>
+</html>

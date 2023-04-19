@@ -1,0 +1,72 @@
+
+<form action="/staff/<%= staff._id %>" method="POST">
+    <label for="staffreg">Staff ID:</label>
+  <input type="text" name="staffreg" id="staffreg" required><br><br>
+
+  <label for="title">Title:</label>
+  <select name="title" id="title" required>
+    <option value="" disabled selected>Select title</option>
+    <option value="Mr">Mr</option>
+    <option value="Miss">Miss</option>
+    <option value="Mrs">Mrs</option>
+    <option value="Prof">Prof</option>
+  </select><br><br>
+
+  <label for="firstName">First Name:</label>
+  <input type="text" name="firstName" id="firstName" required><br><br>
+
+  <label for="lastName">Last Name:</label>
+  <input type="text" name="lastName" id="lastName" required><br><br>
+
+  <label for="sex">Sex:</label>
+  <select name="sex" id="sex" required>
+    <option value="" disabled selected>Select sex</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select><br><br>
+
+  <label for="department">Department:</label>
+  <input type="text" name="department" id="department" required><br><br>
+
+  <h2>Contact</h2>
+
+  <label for="address">Address:</label>
+  <input type="text" name="address" id="address" required><br><br>
+
+  <label for="mobilePhone">Mobile Phone:</label>
+  <input type="tel" name="mobilePhone" id="mobilePhone" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+  
+  <br>
+  <br>
+
+
+
+  <label for="email">Email:</label>
+  <input type="email" name="email" id="email" required><br><br>
+
+  <label for="username">Username:</label>
+  <input type="text" name="username" id="username" required><br><br>
+
+  <label for="password">Password:</label>
+  <input type="password" name="password" id="password" required><br><br>
+
+  <label>Privileges:</label><br>
+  <input type="checkbox" name="file" id="file" value="file">
+  <label for="file">File</label><br>
+  <input type="checkbox" name="setup" id="setup" value="setup">
+  <label for="setup">Set Up</label><br>
+  <input type="checkbox" name="administration" id="administration" value="administration">
+  <label for="administration">Administration</label><br>
+  <input type="checkbox" name="sms" id="sms" value="sms">
+  <label for="sms">SMS</label><br>
+  <input type="checkbox" name="help" id="help" value="help">
+  <label for="help">Help</label><br>
+  <input type="checkbox" id="checkAll" onclick="toggle(this)">
+  <label for="checkAll">Check All</label>
+  <input type="checkbox" id="uncheckAll" onclick="toggle(this)">
+  <label for="uncheckAll">Uncheck All</label><br><br>
+
+  <button type="submit" class="btn btn-danger">Save Changes</button>
+
+
+</form>

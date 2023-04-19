@@ -1,0 +1,106 @@
+<!-- complaint.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complaint</title>
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="css/location.css">
+
+
+  <style>
+
+form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    label {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+input[type="text"], input[type="email"], input[type="password"],  select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f2f2f2;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='5'><path d='M1 1l3 3 3-3' stroke='%23333' stroke-width='2' fill='none' stroke-linecap='square'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+input[type="submit"]:hover {
+  background-color: #555;
+}
+     
+  </style>
+</head>
+<body>
+  <h3><i id="back-btn" class="fas fa-arrow-left back-button"></i></h3>
+  <div class="login-box">
+    <h1 style="text-align: center; color: white;">Complaints/Reports</h1>
+
+  <form method="POST" action="/complaints/addcomplaint">
+    <div class="form-group">
+      <label for="department">Department</label>
+      <select class="form-control" name="department" id="department">
+        <% departments.forEach(function(department) { %>
+          <option value="<%= department._id %>"><%= department.departmentName %></option>
+        <% }) %>
+      </select>
+    </div>
+    <label for="complaintBy">Complaint By:</label>
+    <input type="text" id="complaintBy" name="complaintBy" required>
+    <br>
+  
+    <div class="form-group">
+      <label for="complaintDate">Complaint Date</label>
+      <input type="date" class="form-control" id="complaintDate" name="complaintDate" value="<%= currentDate %>" readonly>
+    </div>
+    <div class="form-group">
+      <label for="facilityDescription">Facility Description</label>
+      <select class="form-control" name="facilityDescription" id="facilityDescription">
+        <% facilities.forEach(function(facility) { %>
+          <option value="<%= facility._id %>"><%= facility.facility_desc %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="complaint">Complaint</label>
+      <textarea class="form-control" id="complaint" name="complaint" rows="5" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-danger">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+  Send Complaint
+    </button>
+    </form>
+  </div>
+  
+  <script src="dist/js/location.js"></script>
+
+</body>
+</html>

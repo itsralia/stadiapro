@@ -1,0 +1,11 @@
+<form action="/departments/<%= departments._id %>" method="POST">
+    <div class="form-group">
+      <label for="departmentName">Department Name:</label>
+      <input type="text" class="form-control" id="departmentName" name="departmentName" value="<%= departments.departmentName %>" required>
+    </div>
+    <div class="form-group">
+      <label for="department_id">Department ID:</label>
+      <input type="text" class="form-control" id="department_id" name="department_id" value="<%= departments.departmenr_id %>" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+  </form>

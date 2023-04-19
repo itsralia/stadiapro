@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Staff Registration Form</title>
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+
+
+
+
+
+    <style>
+      body{
+        background: linear-gradient(45deg, #2e6949, #d49f52);
+
+      }
+        table {
+          border-collapse: collapse;
+          width: 100%;
+          margin-top: 20px;
+        }
+        
+        th, td {
+          text-align: left;
+          padding: 8px;
+          border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+          background-color: #4CAF50;
+          color: white;
+        }
+
+        form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+label {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+input[type="text"], input[type="email"], input[type="password"],  select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f2f2f2;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='5'><path d='M1 1l3 3 3-3' stroke='%23333' stroke-width='2' fill='none' stroke-linecap='square'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+input[type="submit"]:hover {
+  background-color: #555;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+th {
+  text-align: left;
+}
+
+thead th {
+  background-color: #2e6949;
+}
+
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+td {
+  position: relative;
+}
+
+td:hover::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px;
+    background-color: #2e2e2e;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .back-button:hover {
+    background-color: #555;
+  }
+  
+  .back-button i {
+    margin-right: 5px;
+  }
+  
+        </style>
+  </head>
+  <body>
+    <h3><i id="back-btn" class="fas fa-arrow-left back-button"></i></h3>
+        <h1 style="text-align: center; color: white;">Staff Registration Form</h1>
+
+    <form action="staff/addstaff" method="POST" >
+        <label for="staffreg">Staff ID:</label>
+      <input type="text" name="staffreg" id="staffreg" required><br><br>
+
+      <label for="title">Title:</label>
+      <select name="title" id="title" required>
+        <option value="" disabled selected>Select title</option>
+        <option value="Mr">Mr</option>
+        <option value="Miss">Miss</option>
+        <option value="Mrs">Mrs</option>
+        <option value="Prof">Prof</option>
+      </select><br><br>
+
+      <label for="firstName">First Name:</label>
+      <input type="text" name="firstName" id="firstName" required><br><br>
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" name="lastName" id="lastName" required><br><br>
+
+      <label for="sex">Sex:</label>
+      <select name="sex" id="sex" required>
+        <option value="" disabled selected>Select sex</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select><br><br>
+
+      <label for="department">Department:</label>
+      <input type="text" name="department" id="department" required><br><br>
+
+      <h2>Contact</h2>
+
+      <label for="address">Address:</label>
+      <input type="text" name="address" id="address" required><br><br>
+
+      <label for="mobilePhone">Mobile Phone:</label>
+      <input type="tel" name="mobilePhone" id="mobilePhone" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+      
+      <br>
+      <br>
+
+
+
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required><br><br>
+
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" required><br><br>
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" required><br><br>
+
+      <label>Privileges:</label><br>
+      <input type="checkbox" name="file" id="file" value="file">
+      <label for="file">File</label><br>
+      <input type="checkbox" name="setup" id="setup" value="setup">
+      <label for="setup">Set Up</label><br>
+      <input type="checkbox" name="administration" id="administration" value="administration">
+      <label for="administration">Administration</label><br>
+      <input type="checkbox" name="sms" id="sms" value="sms">
+      <label for="sms">SMS</label><br>
+      <input type="checkbox" name="help" id="help" value="help">
+      <label for="help">Help</label><br>
+      <input type="checkbox" id="checkAll" onclick="toggle(this)">
+      <label for="checkAll">Check All</label>
+      <input type="checkbox" id="uncheckAll" onclick="toggle(this)">
+      <label for="uncheckAll">Uncheck All</label><br><br>
+
+      <button type="submit" class="btn btn-danger">Add Staff</button>
+
+
+    </form>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Staff ID</th>
+                <th>Title</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Sex</th>
+                <th>Department</th>
+                <th>Delete</th>
+                <th>Edit</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <% staffs.forEach(function(staff) { %>
+                <tr>
+                    <td><%= staff.staffreg %></td>
+                    <td><%= staff.title %></td>
+                    <td><%= staff.firstName %></td>
+                    <td><%= staff.lastName %></td>
+                    <td><%= staff.sex %></td>
+                    <td><%= staff.department%></td>
+
+                    
+                    <td class="icon" style="width: 50px;">
+                        <form action="/staff/deletestaff/<%= staff._id %>?_method=DELETE"  method="POST">
+                          <button type="submit" class="btn btn-danger delete-icon"><i class="fa fa-trash"></i></button>
+                        </form>
+                      </td> 
+                      <td class="icon" style="width: 50px;">
+                        <form action="/staff/edit/<%= staff._id %>" method="GET">
+                          <button type="submit" class="btn btn-primary edit-icon"><i class="fa fa-edit"></i></button>
+                        </form>
+                    </tr>
+
+
+
+
+            <% }); %>
+        </tbody>
+    </table>
+    <script src="dist/js/location.js"></script>
+
+</body>
+</html>
+   

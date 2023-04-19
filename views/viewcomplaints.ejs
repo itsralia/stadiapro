@@ -1,0 +1,76 @@
+<!-- user-complaints.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Complaints</title>
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="css/location.css">
+
+<style>
+    table {
+          border-collapse: collapse;
+          width: 100%;
+          margin-top: 20px;
+        }
+        
+        th, td {
+          text-align: left;
+          padding: 8px;
+          border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+          background-color: #4CAF50;
+          color: white;
+        }
+
+        form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+</style>
+
+
+</head>
+<body>
+    <h3><i id="back-btn" class="fas fa-arrow-left back-button"></i></h3>
+    <div class="login-box">
+   
+    <h1 style="text-align: center; color: white;">My Complaints</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Complaint ID</th>
+                <th>Department</th>
+                <th>Complaint By</th>
+                <th>Complaint Date</th>
+                <th>Facility Description</th>
+                <th>Complaint Made</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% let counter = 1; %>
+            <% for (let i = 0; i < complaints.length; i++) { %>
+                <tr>
+                    <td><%= counter %></td>
+                    <td><%= complaints[i].department.departmentName %></td>
+                    <td><%= complaints[i].complaintBy %></td>
+                    <td><%= complaints[i].complaintDate.toLocaleDateString() %></td>
+                    <td><%= complaints[i].facilityDescription.facility_desc %></td>
+                    <td><%= complaints[i].complaint %></td>
+    
+                </tr>
+                <% counter++; %>
+            <% } %>
+        </tbody>
+    </table>  
+    <script src="dist/js/location.js"></script>
+
+</body>
+</html>
+

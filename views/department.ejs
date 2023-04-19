@@ -1,0 +1,75 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="css/location.css">
+
+
+    <title>Department</title>
+    
+  </head>
+  <body class="dimmed">
+    <h3><i id="back-btn" class="fas fa-arrow-left back-button"></i></h3>
+    <div class="login-box">
+   
+      <div class="form-container">
+        <h2 style="text-align: center; color: white;">Add Departments</h2>
+        <form action="/departments/adddepartment" method="POST">
+          <div class="user-box">
+            <input type="text" name="department" required="">
+            <label>Department:</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="department_id" required="">
+            <label>Department ID:</label>
+          </div>
+          <button type="submit" class="btn btn-danger">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Add Department
+          </button>
+        </form>
+      </div>
+      
+    </div>
+    
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Department ID</th>
+                <th>Department Name</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+          
+            <% departments.forEach(function(department) { %>
+                <tr>
+                      <td><%= department.department_id %></td>
+                      <td><%= department.departmentName %></td>
+                  
+                    <td class="icon" style="width: 50px;">
+                        <form action="/departments/deletedepartments/<%= department._id %>?_method=DELETE"  method="POST">
+                          <button type="submit" class=" btn-danger delete-icon"><i class="fa fa-trash"></i></button>
+                        </form>
+                      </td> 
+                      <td class="icon" style="width: 50px;">
+                        <form action="/departments/edit/<%= department._id %>" method="GET">
+                          <button type="submit" class=" btn-primary edit-icon"><i class="fa fa-edit"></i></button>
+                        </form>
+                    </tr>
+
+
+            <% }); %>
+        </tbody>
+    </table>
+    <script src="dist/js/location.js"></script>
+</body>
+</html>

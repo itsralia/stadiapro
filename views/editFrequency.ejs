@@ -1,0 +1,48 @@
+
+<form action="/frequency/<%= frequency._id %>" method="POST">
+    <table>
+      <tr>
+        <h3>Frequency Type</h3>
+        <td>
+           Frequency ID <input type="text" id="frequency_id" name="frequency_id" value="Frequency ID">
+
+          <input type="radio" id="daily" name="frequencyName" value="daily">
+          <label for="daily">Daily (every <input type="number" name="days"> days)</label>
+          <br>
+          <input type="radio" id="frequencyName" name="frequencyName" value="weekly">
+          <label for="weekly">Weekly (every <input type="number" name="frequencyName"> weeks, on <select name="weekday">
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+          </select>)</label>
+          <br>
+          <input type="radio" id="frequencyType" name="frequencyType" value="monthly">
+          <label for="monthly">Monthly (starting on <input type="date" name="frequencyType">)</label>
+          <br>
+          <input type="radio" id="yearly" name="frequencyName" value="yearly">
+          <label for="yearly">Yearly (in <select name="frequencyType">
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+          </select>)</label>
+          <br>
+          <input type="radio" id="as-required" name="frequencyName" value="as-required">
+          <label for="as-required">As Required</label>
+        </td>
+      </tr>
+    </table>
+    <input type="submit" value="Save Changes">
+  </form>
