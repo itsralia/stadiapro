@@ -34,8 +34,8 @@ module.exports = {
 
     getSms: async (req, res) => {
         try {
-          const staffList = await Staff.find();
-          const facilityList = await Facility.find();
+          const staffList = await Staff.find({user: req.user.id});
+          const facilityList = await Facility.find({user: req.user.id});
           res.render("sms.ejs", { staffList: staffList, facilityList: facilityList });
         } catch (err) {
           console.log(err);
