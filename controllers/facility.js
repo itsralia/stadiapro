@@ -12,9 +12,9 @@ module.exports = {
         //   console.log(facilities);
         // }
             try {
-              const categories = await Category.find({}).exec();
-              const locations = await Location.find({}).exec();
-              const staffs = await Staff.find({}).exec();
+              const categories = await Category.find({user: req.user.id}).exec();
+              const locations = await Location.find({ user: req.user.id }).exec();
+              const staffs = await Staff.find({user: req.user.id}).exec();
               const facilities = await Facility.find({ user: req.user.id }).populate('location').populate('category').populate('staff').exec();
               res.render("facility.ejs", { categories: categories, facilities: facilities, locations:locations, staffs: staffs, user: req.user });
             } catch (err) {
@@ -24,11 +24,9 @@ module.exports = {
       ,
       addFacility: async (req, res) => {
         try {
-          const categories = await Category.find({}).exec();
-          const locations = await Location.find({}).exec();
-          const staffs = await Staff.find({}).exec();
-
-
+          const categories = await Category.find({user: req.user.id}).exec();
+              const locations = await Location.find({ user: req.user.id }).exec();
+              const staffs = await Staff.find({user: req.user.id}).exec();
           await Facility.create({
             facility_id: req.body.facility_id,
             facility_desc: req.body.facility_desc,
@@ -69,9 +67,9 @@ module.exports = {
         geteditFacility: async (req, res) => {
             try {
               const facility = await Facility.findById({_id: req.params.id});
-              const categories = await Category.find({}).exec();
-              const locations = await Location.find({}).exec();
-              const staffs = await Staff.find({}).exec();
+              const categories = await Category.find({user: req.user.id}).exec();
+              const locations = await Location.find({ user: req.user.id }).exec();
+              const staffs = await Staff.find({user: req.user.id}).exec();
               res.render("editFacility.ejs", { categories: categories, facility: facility, locations:locations, staffs: staffs, user: req.user });
             } catch (err) {
               console.log(err);
