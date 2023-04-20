@@ -8,6 +8,9 @@ const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
+const path = require("path");
+
+const Admin = require("./models/Admin");
 const twilio = require("./config/twilio");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
@@ -27,7 +30,7 @@ const lifespanRoutes = require("./routes/lifespan")
 const smsRoutes = require("./routes/sms")
 const regressionRoutes = require("./routes/regression")
 const helpRoutes = require("./routes/help")
-
+const adminRoutes = require("./routes/admin")
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -44,6 +47,8 @@ if(connectDB()){
 }
 
 
+
+
 // twilio connection
 // twilio()
 //Using EJS for views
@@ -51,6 +56,7 @@ app.set("view engine", "ejs");
 
 //Static Folder
 app.use(express.static("public"));
+app.use('/admin', express.static(path.join(__dirname, 'public')));
 
 //Body Parsing
 app.use(express.urlencoded({ extended: true }));
@@ -62,6 +68,9 @@ app.use(logger("dev"));
 //Use forms for put / delete
 app.use(methodOverride("_method"));
 
+
+
+
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
@@ -72,12 +81,25 @@ app.use(
   })
 );
 
+
+// // Create a default admin user
+// Admin.createDefaultAdminUser()
+//   .then(() => {
+//     console.log("Default admin user created successfully!");
+//   })
+//   .catch((error) => {
+//     console.error("Failed to create default admin user:", error);
+//   });
+
+
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
 //Use flash messages for errors, info, ect...
 app.use(flash());
+
+
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
@@ -98,10 +120,12 @@ app.use("/lifespan", lifespanRoutes)
 app.use("/sms", smsRoutes)
 app.use("/regression", regressionRoutes)
 app.use("/help", helpRoutes)
+app.use("/admin", adminRoutes)
 
-// // error handdling
+
+// error handdling
 app.use(function(req,res){
-  res.status(404).render('errorpage.ejs');
+  res.status(404 || 302).render('errorpage.ejs');
 });
 
 

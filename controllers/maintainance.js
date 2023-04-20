@@ -10,13 +10,13 @@ const Frequency = require("../models/Frequency");
 module.exports = {
   getMaintainance: async (req, res) => {
     try {
-      const staffs = await Staff.find({}).exec();
-      const departments = await Department.find({}).exec();
-      const frequency = await Frequency.find({}).exec();
+      const staffs = await Staff.find({user:req.user.id}).exec();
+      const departments = await Department.find({user:req.user.id}).exec();
+      const frequency = await Frequency.find({user: req.user.id}).exec();
 
       // const maintainance = await Maintainance.find({ facility_id: mongoose.Types.ObjectId(req.params.id), assigned_staff: mongoose.Types.ObjectId(req.user.id) })
-      const maintainance = await Maintainance.find({ user: req.user})
-        .populate('assigned_staff')
+      const maintainance = await Maintainance.find({  user: req.user.id })
+      .populate('assigned_staff')
         .populate('operator')
         .populate('frequency')
         .exec();
@@ -33,10 +33,10 @@ module.exports = {
   },
   addMaintainance: async (req, res) => {
     try {
-        const staffs = await Staff.find({}).exec();
-        const departments = await Department.find({}).exec();
-        const frequency = await Frequency.find({}).exec();
-      
+      const staffs = await Staff.find({user:req.user.id}).exec();
+      const departments = await Department.find({user:req.user.id}).exec();
+      const frequency = await Frequency.find({user: req.user.id}).exec();
+
         facilityId = req.params.id
         await Maintainance.create({
           facility_id: mongoose.Types.ObjectId(facilityId),

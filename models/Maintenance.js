@@ -4,19 +4,15 @@ const MaintainanceSchema = new mongoose.Schema({
   facility: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Facility',
-  },
-  facility_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Facility',
-    required: true
+    required: true,
   },
   check:{
     type: Number,
     required: true,
   },
   maintainance_id:{
-type: Number,
-required: true,
+    type: Number,
+    required: true,
   },
   cause: {
     type: String,
@@ -56,6 +52,7 @@ required: true,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   createdAt: {
     type: Date,

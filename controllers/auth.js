@@ -1,6 +1,17 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+const Admin = require("../models/Admin")
+
+
+// exports.isAdmin = (req, res, next) => {
+//   if (req.user && req.user.isAdmin) {
+//     return next();
+//   } else {
+//     req.flash("errors", { msg: "You must be an admin to access this page." });
+//     return res.redirect("/login");
+//   }
+// };
 
 exports.getLogin = (req, res) => {
   if (req.user) {

@@ -9,31 +9,34 @@ const FacilitySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-   user: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   location: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Location",
-},
-category: {
+  },
+  category: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-
     ref: "Equipment",
-},
-interval: {
-  type: Number,
-  required: true,
-  default:1,
-},
-staff: {
-  type: mongoose.Schema.Types.ObjectId,
-  ref: "Staff",
-  default: null // Set default value to null so that the field can be empty if no staff is assigned
-}
-,
+  },
+  interval: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
+  staff: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Staff",
+    default: null,
+  },
+  maintainances: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Maintenance',
+  }],
   createdAt: {
     type: Date,
     default: Date.now,
