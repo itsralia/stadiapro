@@ -61,7 +61,7 @@
                     <td><%= complaints[i].department.departmentName %></td>
                     <td><%= complaints[i].complaintBy %></td>
                     <td><%= complaints[i].complaintDate.toLocaleDateString() %></td>
-                    <td><%= complaints[i].facilityDescription.facility_desc %></td>
+                    <td><%= complaints[i].facilityDescription ? complaints[i].facilityDescription.facility_desc : 'N/A' %></td>
                     <td><%= complaints[i].complaint %></td>
     
                 </tr>

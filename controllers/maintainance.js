@@ -4,6 +4,7 @@ const Maintainance = require("../models/Maintenance")
 const Staff = require("../models/Staff")
 const Department = require("../models/Department")
 const Frequency = require("../models/Frequency");
+const Facility = require("../models/Facility")
 
 
 
@@ -13,10 +14,11 @@ module.exports = {
       const staffs = await Staff.find({user:req.user.id}).exec();
       const departments = await Department.find({user:req.user.id}).exec();
       const frequency = await Frequency.find({user: req.user.id}).exec();
+     const  facilities = await Facility.find({user: req.params.id}).exec();
 
       // const maintainance = await Maintainance.find({ facility_id: mongoose.Types.ObjectId(req.params.id), assigned_staff: mongoose.Types.ObjectId(req.user.id) })
-      const maintainance = await Maintainance.find({  user: req.user.id })
-      .populate('assigned_staff')
+      const maintainance = await Maintainance.find({ user: req.user.id})
+        .populate('assigned_staff')
         .populate('operator')
         .populate('frequency')
         .exec();
@@ -25,7 +27,7 @@ module.exports = {
       console.log(req.params.id);
       console.log("this is " + maintainance);
 
-      res.render("maintainance.ejs", { staffs, departments, maintainance, frequency, user: req.user.id });
+      res.render("maintainance.ejs", { staffs, departments, maintainance, frequency, user: req.user.id , _id: req.params.id});
     } catch (err) {
       console.log(err);
       res.status(500).send(err);
@@ -39,7 +41,7 @@ module.exports = {
 
         facilityId = req.params.id
         await Maintainance.create({
-          facility_id: mongoose.Types.ObjectId(facilityId),
+          facility: mongoose.Types.ObjectId(facilityId),
           check: req.body.check,
           maintainance_id: req.body.maintainance_id,
           cause: req.body.cause,
@@ -68,7 +70,6 @@ module.exports = {
               return res.status(500).send(err);
             }
       
-            console.log(result);
             res.render("maintainance.ejs", {
               staffs,
               departments,
