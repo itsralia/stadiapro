@@ -91,7 +91,7 @@ input[type="submit"]:hover {
 
         <label for="outsourced">Frequency</label>
         <select name="frequency" id="frequency" required>
-          <option value="" disabled selected>Select Location</option>
+          <option value="" disabled selected>Select Frequency</option>
           <% frequency.forEach(function(frequency) { %>
             <option value="<%= frequency._id %>"><%= frequency.frequencyName %></option>
           <% }); %>

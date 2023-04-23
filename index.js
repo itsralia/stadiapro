@@ -127,9 +127,9 @@ app.use("/admin", adminRoutes)
 
 
 // error handdling
-// app.use(function(req,res){
-//   res.status(404 || 302).render('errorpage.ejs');
-// });
+app.use(function(req,res){
+  res.status(404 || 302).render('errorpage.ejs');
+});
 
 
 
