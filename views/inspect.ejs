@@ -56,11 +56,7 @@
               <td><%= facility.location ? facility.location.locationName : 'N/A' %></td>
               <td><%= facility.category.category %></td>
               <td>
-                <% if (facility.maintainance && facility.maintainance.length > 0) { %>
-                  <%= facility.maintainance[0].price %>
-                <% } else { %>
-                  N/A
-                <% } %>
+                <%= facility.totalCost %>
               </td>
               <td><%= facility.createdAt.toLocaleString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true}) %></td>
 

@@ -16,6 +16,7 @@ module.exports = {
               const locations = await Location.find({ user: req.user.id }).exec();
               const staffs = await Staff.find({user: req.user.id}).exec();
               const facilities = await Facility.find({ user: req.user.id }).populate('location').populate('category').populate('staff').exec();
+              console.log("ABA", facilities)
               res.render("facility.ejs", { categories: categories, facilities: facilities, locations:locations, staffs: staffs, user: req.user });
             } catch (err) {
               console.log(err);
@@ -27,6 +28,8 @@ module.exports = {
           const categories = await Category.find({user: req.user.id}).exec();
               const locations = await Location.find({ user: req.user.id }).exec();
               const staffs = await Staff.find({user: req.user.id}).exec();
+              const facilities = await Facility.find({ user: req.user.id }).populate('location').populate('category').populate('staff').exec();
+
           await Facility.create({
             facility_id: req.body.facility_id,
             facility_desc: req.body.facility_desc,
@@ -38,8 +41,7 @@ module.exports = {
           });
           console.log(req.body.category)
           console.log("Facility has been added!");
-      
-          const facilities = await Facility.find({ user: req.user.id }).populate('category').populate('location').exec();
+          console.log('ABA', facilities, req.body)
           res.render("facility.ejs", { categories: categories, facilities: facilities, locations:locations, staffs: staffs, user: req.user }); // render the updated list of locations
         } catch (err) {
           console.log(err);

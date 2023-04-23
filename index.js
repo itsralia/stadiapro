@@ -57,6 +57,9 @@ app.set("view engine", "ejs");
 //Static Folder
 app.use(express.static("public"));
 app.use('/admin', express.static(path.join(__dirname, 'public')));
+app.use('/maintainance', express.static(path.join(__dirname, 'public')));
+
+
 
 //Body Parsing
 app.use(express.urlencoded({ extended: true }));
@@ -124,9 +127,9 @@ app.use("/admin", adminRoutes)
 
 
 // error handdling
-app.use(function(req,res){
-  res.status(404 || 302).render('errorpage.ejs');
-});
+// app.use(function(req,res){
+//   res.status(404 || 302).render('errorpage.ejs');
+// });
 
 
 

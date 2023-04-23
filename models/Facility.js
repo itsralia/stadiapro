@@ -35,7 +35,7 @@ const FacilitySchema = new mongoose.Schema({
   },
   maintainances: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Maintenance',
+    ref: 'Maintainance',
   }],
   createdAt: {
     type: Date,

@@ -60,4 +60,4 @@ const MaintainanceSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Maintainance', MaintainanceSchema);
+module.exports = mongoose.model('Maintainance', MaintainanceSchema, 'maintainances');

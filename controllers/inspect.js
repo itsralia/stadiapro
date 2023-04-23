@@ -12,15 +12,26 @@ module.exports = {
       const facilities = await Facility.find({ user: req.user.id })
         .populate('location')
         .populate('category')
-        .populate({ path: 'maintainance', populate: { path: 'assigned_staff operator frequency price' } })
+        .populate("maintainances")
+        // .populate({ path: 'maintainances', populate: { path: 'assigned_staff operator frequency price' } })
         .exec();
-        console.log(maintainance)
+        console.log("A", maintainance)
       // Calculate the last maintenance date for each facility
+      console.log("CCC", facilities)
       facilities.forEach((facility) => {
         const today = new Date();
         const createdAtDate = new Date(facility.createdAt);
         const daysSinceLastMaintenance = Math.floor((today - createdAtDate) / (1000 * 60 * 60 * 24));
         facility.lastMaintenanceDate = daysSinceLastMaintenance;
+        
+        console.log("B", facility.maintainances.reduce((x, y) => x.price + y.price, 0))
+        let totalCost = 0
+        console.log("HELLO", facility.maintainances.forEach(x => {
+          console.log(x.price)
+          totalCost += x.price
+        }))
+        console.log("ALLEY", totalCost)
+        facility.totalCost = totalCost
       });
 
      

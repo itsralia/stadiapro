@@ -6,9 +6,9 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Main Routes - simplified for now
 router.get("/:id", maintainanceController.getMaintainance);
-router.post('/addmaintainance', maintainanceController.addMaintainance)
+router.post('/addmaintainance/:id', maintainanceController.addMaintainance)
 router.get("/edit/:id", maintainanceController.geteditMaintainance);
-router.post("/:id", maintainanceController.editMaintainance);
+router.post("/editmaintainance/:id", maintainanceController.editMaintainance);
 router.delete("/deletemaintainance/:id", maintainanceController.deleteMaintainance)
 // router.get('/:facilityId', maintainanceController.getMaintainance);
 

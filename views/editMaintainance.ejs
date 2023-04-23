@@ -1,0 +1,56 @@
+<form action="/maintainance/editmaintainance/<%= maintainance._id %>" method="POST">
+    <label for="location">Check</label>
+    <input type="text" name="check" required>
+
+    <label for="location">Maintainance ID</label>
+    <input type="text" name="maintainance_id" required>
+
+
+    <label for="location_id">Causes:</label>
+    <input type="text" name="cause" required>
+
+
+    <label for="location">Percentage</label>
+    <input type="text" name="percentage" required>
+
+    <label for="outsourced">Frequency</label>
+    <select name="frequency" id="frequency" required>
+      <option value="" disabled selected>Select Location</option>
+      <% frequency.forEach(function(frequency) { %>
+        <option value="<%= frequency._id %>"><%= frequency.frequencyName %></option>
+      <% }); %>
+    </select>
+
+    <label for="outsourced">Operator</label>
+    <select name="operator" id="frequency" required>
+      <option value="" disabled selected>Select Operator</option>
+      <% departments.forEach(function(department) { %>
+        <option value="<%= department._id %>"><%= department.departmentName %></option>
+      <% }); %>
+    </select>
+
+    <label for="outsourced">Assigned Staff</label>
+    <select name="staff" id="category" required>
+      <option value="" disabled selected>Select Staff</option>
+      <% staffs.forEach(function(staff) { %>
+        <option value="<%= staff._id %>"><%= staff.firstName %></option>
+      <% }); %>
+    </select>
+  
+  <br><br>
+  <label for="location_id">Maintenance Instructions:</label>
+  <input type="text" name="instruction" required>
+  <br>
+  <label for="mainrepair">Maintainance / Repair:</label>
+  <select name="mainrepair" id="mainrepair" required>
+    <option value="" disabled selected>Select one</option>
+    <option value="Maintenance">Maintenance</option>
+    <option value="Replacement">Replacement</option>
+    
+  </select><br><br>
+
+  <label for="price">Cost Associated :</label>
+  <input type="text" name="price" required>
+
+    <button type="submit" class="btn btn-danger">Add Maintainance</button>
+</form>
