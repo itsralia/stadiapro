@@ -9,23 +9,22 @@ module.exports = {
     try {
       const facilities = await Facility.find({ user: req.user.id }).exec();
       const numFacilities = facilities.length;
-      const numMaintainedFacilities = await Maintainance.countDocuments({  user: req.user.id, mainrepair: 'Maintenance'}).exec();
-      const numRepairedFacilities = await Maintainance.countDocuments({ facility: facilities['_id'], user: req.user.id, mainrepair: 'Repair'}).exec();
-      const numReplacedFacilities = await Maintainance.countDocuments({ facility: facilities['_id'], user: req.user.id, mainrepair: 'Replacement'}).exec();
+      const numMaintainedFacilities = await Maintainance.countDocuments({ user: req.user.id, mainrepair: 'Maintenance'}).exec();
+      const numRepairedFacilities = await Maintainance.countDocuments({ user: req.user.id, mainrepair: 'Repair'}).exec();
+      const numReplacedFacilities = await Maintainance.countDocuments({ user: req.user.id, mainrepair: 'Replacement'}).exec();
   
   
       const x1 = numFacilities;
       const x2 = numMaintainedFacilities;
       const x3 = numRepairedFacilities;
       const x4 = numReplacedFacilities;
-
-
+  
+  
       const y1 = numFacilities;
       const y2 = numMaintainedFacilities;
       const y3 = numRepairedFacilities;
       const y4 = numReplacedFacilities;
-
-
+  
   
       // calculate predicted value of Y
       const predictedY = 85.716 + (0.095 * x1) - (0.504 * x2) + (0.179 * x3) - (0.159 * x4);
@@ -44,6 +43,7 @@ module.exports = {
       res.status(500).send(err);
     }
   },
+  
   
   
   
