@@ -40,6 +40,8 @@ module.exports = {
       await newComplaint.save();
       
       console.log("Complaint has been added")
+      req.flash('success', 'Complaint Sent');
+
       res.redirect("/complaints");
     } catch (err) {
       console.log(err);

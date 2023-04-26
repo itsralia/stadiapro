@@ -12,9 +12,10 @@ module.exports = {
       const maintenanceDue = [];
 
       for (const facility of facilities) {
-        const lastMaintenance = await Maintenance.findOne({ facility: facility._id }).populate('staff').sort({ createdAt: -1 }).exec();
+        const maintenances = await Maintenance.find({ facility: facility._id }).populate('assigned_staff').sort({ createdAt: -1 }).exec();
 
-        if (lastMaintenance) {
+        if (maintenances && maintenances.length > 0) {
+          const lastMaintenance = maintenances[0];
           const dueDate = new Date(lastMaintenance.createdAt);
           dueDate.setMonth(dueDate.getMonth() + facility.interval);
           if (today > dueDate) {
@@ -23,9 +24,9 @@ module.exports = {
               facilityId: facility._id,
               facilityIdent: facility.facility_id,
               facilityDescription: facility.facility_desc,
-              lastMaintenanceId:lastMaintenance.maintainance_id,
+              lastMaintenanceId: lastMaintenance._id,
               nextDueDate: dueDate,
-              assignedStaff: staffForFacility ? `${staffForFacility.firstName} ${staffForFacility.lastName}` : null
+              assignedStaff: staffForFacility ? staffForFacility.name : ''
             });
           }
         } else {
@@ -36,9 +37,9 @@ module.exports = {
               facilityId: facility._id,
               facilityIdent: facility.facility_id,
               facilityDescription: facility.facility_desc,
-              lastMaintenanceId: null,
+              lastMaintenanceId: '',
               nextDueDate: dueDate,
-              assignedStaff: null
+              assignedStaff: ''
             });
           }
         }
@@ -48,9 +49,12 @@ module.exports = {
         res.render("maintenancedue.ejs", { message: "No facility is currently due for maintenance", maintenanceDue: maintenanceDue, facilities: facilities, user: req.user });
       } else {
         res.render("maintenancedue.ejs", { maintenanceDue: maintenanceDue, facilities: facilities, user: req.user });
+        console.log("MaintenanceDue", maintenanceDue, "FACILITY" , facilities)
       }
     } catch (err) {
       console.log(err);
     }
   }
 };
+
+

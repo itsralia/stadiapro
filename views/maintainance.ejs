@@ -122,7 +122,8 @@ input[type="submit"]:hover {
         <option value="" disabled selected>Select one</option>
         <option value="Maintenance">Maintenance</option>
         <option value="Replacement">Replacement</option>
-        
+        <option value="Repair">Repair</option>
+
       </select><br><br>
 
       <label for="price">Cost Associated :</label>
@@ -147,7 +148,19 @@ input[type="submit"]:hover {
                 <th>Delete</th>
                 <th>Edit</th>
             </tr>
-        </thead>
+
+
+            <!-- Display Total Facilities Maintained -->
+<p>Total Facilities Maintained: <%= totalFacilitiesMaintained %></p>
+
+<!-- Display Facilities Repaired -->
+<p>Facilities Repaired: <%= facilitiesRepaired %></p>
+
+<!-- Display Total Facilities Replaced -->
+<p>Total Facilities Replaced: <%= totalFacilitiesReplaced %></p>
+
+
+
         <tbody>
             <% maintainance.forEach(function(maintain) { %>
                 <tr>

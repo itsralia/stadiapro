@@ -47,7 +47,7 @@ const MaintainanceSchema = new mongoose.Schema({
   },
   mainrepair:{
     type: String,
-    enum:['Maintenance', 'Replacement'],
+    enum:['Maintenance', 'Replacement', 'Repair'],
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

@@ -17,7 +17,12 @@ module.exports = {
               const staffs = await Staff.find({user: req.user.id}).exec();
               const facilities = await Facility.find({ user: req.user.id }).populate('location').populate('category').populate('staff').exec();
               console.log("ABA", facilities)
-              res.render("facility.ejs", { categories: categories, facilities: facilities, locations:locations, staffs: staffs, user: req.user });
+
+
+              const totalFacilities = facilities.length; // get the total number of facilities
+
+              res.render("facility.ejs", { categories: categories, facilities: facilities, locations:locations, staffs: staffs, user: req.user, totalFacilities: totalFacilities // pass the totalFacilities variable to the template
+            });
             } catch (err) {
               console.log(err);
             }
@@ -29,6 +34,8 @@ module.exports = {
               const locations = await Location.find({ user: req.user.id }).exec();
               const staffs = await Staff.find({user: req.user.id}).exec();
               const facilities = await Facility.find({ user: req.user.id }).populate('location').populate('category').populate('staff').exec();
+
+
 
           await Facility.create({
             facility_id: req.body.facility_id,
@@ -42,7 +49,10 @@ module.exports = {
           console.log(req.body.category)
           console.log("Facility has been added!");
           console.log('ABA', facilities, req.body)
-          res.render("facility.ejs", { categories: categories, facilities: facilities, locations:locations, staffs: staffs, user: req.user }); // render the updated list of locations
+          const totalFacilities = facilities.length; // get the total number of facilities
+
+              res.render("facility.ejs", { categories: categories, facilities: facilities, locations:locations, staffs: staffs, user: req.user, totalFacilities: totalFacilities // pass the totalFacilities variable to the template
+            });
         } catch (err) {
           console.log(err);
         }

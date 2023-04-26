@@ -14,26 +14,37 @@ module.exports = {
       const staffs = await Staff.find({user:req.user.id}).exec();
       const departments = await Department.find({user:req.user.id}).exec();
       const frequency = await Frequency.find({user: req.user.id}).exec();
-     const  facilities = await Facility.findOne({_id: req.params.id}).exec();
-    //  const facilities = await Facility.find({ user: req.user.id }).populate('location').populate('category').populate('staff').exec();
-
+      const facilities = await Facility.findOne({_id: req.params.id}).exec();
+  
       const maintainance = await Maintainance.find({ facility: facilities['_id'], user: req.user.id})
         .populate('assigned_staff')
         .populate('operator')
         .populate('frequency')
         .exec();
-      // console.log("THIS IS FACILITY", facilities)
-      console.log(req.user.id);
-      console.log(req.params.id);
-      // console.log("this is " + maintainance);
-
-
-      res.render("maintainance.ejs", { staffs, facilities, departments, maintainance, frequency, user: req.user.id , _id: req.params.id});
+  
+      const totalFacilitiesMaintained = await Maintainance.countDocuments({ facility: facilities['_id'], user: req.user.id, mainrepair: 'Maintenance'}).exec();
+      const facilitiesRepaired = await Maintainance.countDocuments({ facility: facilities['_id'], user: req.user.id, mainrepair: 'Repair'}).exec();
+      const totalFacilitiesReplaced = await Maintainance.countDocuments({ facility: facilities['_id'], user: req.user.id, mainrepair: 'Replacement'}).exec();
+  
+      res.render("maintainance.ejs", {
+        staffs,
+        facilities,
+        departments,
+        maintainance,
+        frequency,
+        user: req.user.id,
+        _id: req.params.id,
+        totalFacilitiesMaintained,
+        facilitiesRepaired,
+        totalFacilitiesReplaced
+      });
     } catch (err) {
       console.log(err);
       res.status(500).send(err);
     }
   },
+  
+  
   addMaintainance: async (req, res) => {
     try {
         const staffs = await Staff.find({user:req.user.id}).exec();
@@ -41,6 +52,8 @@ module.exports = {
         const frequency = await Frequency.find({user: req.user.id}).exec();
         const facilities = await Facility.findOne({_id: req.params.id}).exec();
 
+
+        
         const newMaintainance = await Maintainance.create({
             facility: mongoose.Types.ObjectId(req.params.id),
             check: req.body.check,
@@ -70,6 +83,11 @@ module.exports = {
             .populate('frequency')
             .exec();
 
+
+            const totalFacilitiesMaintained = await Maintainance.countDocuments({ facility: facilities['_id'], user: req.user.id, mainrepair: 'Maintenance'}).exec();
+            const facilitiesRepaired = await Maintainance.countDocuments({ facility: facilities['_id'], user: req.user.id, mainrepair: 'Repair'}).exec();
+            const totalFacilitiesReplaced = await Maintainance.countDocuments({ facility: facilities['_id'], user: req.user.id, mainrepair: 'Replacement'}).exec();
+        
         console.log("MY RESULT")
         res.render("maintainance.ejs", {
             staffs,
@@ -77,7 +95,10 @@ module.exports = {
             facilities,
             frequency,
             maintainance: result,
-            user: req.user.id
+            user: req.user.id,
+            totalFacilitiesMaintained,
+            facilitiesRepaired,
+            totalFacilitiesReplaced
         });
     } catch (err) {
         console.log(err);
