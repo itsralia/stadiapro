@@ -10,29 +10,44 @@
 
     <link rel="stylesheet" href="css/location.css">
 </head>
-<body>
+<body style="color: white; padding: 2%;">
     <h3><i id="back-btn" class="fas fa-arrow-left back-button"></i></h3>
     <div class="login-box">
    
-        <h1>Regression Results</h1>
+        <h1 style="text-align: center;">Regression Results</h1>
+<p>The regression equation developed for the model to determine the general facility condition is given as: Y = 85.716 + 0.095x1  - 0.504x2 + 0.179x3 - 0.159x4
 
-<h2>General Facility Condition</h2>
+    where x1 = total no of facilities
+    x2 = no of maintained facilities
+    x3 = no of repaired facilities
+    x4 = no of replaced facilities
+    </p>
+<h2 style="text-align: center;">General Facility Condition</h2>
+        <p>Total number of facilities (x1): <%= totalFacilities %></p>
+        <p>Number of maintained facilities(x2): <%= maintainedFacilities %></p>
+        <p>Number of repaired facilities(x3): <%= repairedFacilities %></p>
+        <p>Number of replaced facilities(x4): <%= replacedFacilities %></p>
+        
+        <p>General Facility Condition: <%= predictedY %>%</p>
+
+
+
+        <h2 style="text-align: center;">General Facility Availability</h2>
+        <p>The regression equation developed for the model to determine the general facility availability is given as:    Y = 60.361 - 0.221y1 + 0.315y2 - 0.006y3 + 0.034y4 
+
+            where y1 = total no of facilities
+            y2 = no of maintained facilities
+            y3 = no of repaired facilities
+            y4 = no of replaced facilities
+         </p>
+
+
         <p>Total number of facilities: <%= totalFacilities %></p>
         <p>Number of maintained facilities: <%= maintainedFacilities %></p>
         <p>Number of repaired facilities: <%= repairedFacilities %></p>
         <p>Number of replaced facilities: <%= replacedFacilities %></p>
         
-        <p>Predicted value of Y: <%= predictedY %></p>
-
-
-        <h2>General Facility Availability</h2>
-
-        <p>Total number of facilities: <%= totalFacilities %></p>
-        <p>Number of maintained facilities: <%= maintainedFacilities %></p>
-        <p>Number of repaired facilities: <%= repairedFacilities %></p>
-        <p>Number of replaced facilities: <%= replacedFacilities %></p>
-        
-        <p>Predicted value of Y: <%= availability %></p>
+        <p> General Facility Availability: <%= availability %>%</p>
         
     <script src="dist/js/location.js"></script>
 
